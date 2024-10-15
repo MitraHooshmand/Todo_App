@@ -7,7 +7,46 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <p>sdfg</p>
+    <div class="container">
+      <h2>Todo App</h2>
+      <div class="input-section">
+        <input type="text" placeholder="Add a task..." id="task-input" />
+        <input type="date" id="date-input" />
+        <button class="add-button">Add</button>
+      </div>
+      <div class="todo-operator">
+        <div>
+          <button class="filter-todo">All</button>
+          <button class="filter-todo">Pending</button>
+          <button class="filter-todo">Completed</button>
+        </div>
+        <button id="delete-all">Delete All</button>
+      </div>
+    </div>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>text</td>
+            <td>date</td>
+            <td>panding</td>
+            <td>
+              <button>Edit</button>
+              <button>Do</button>
+              <button>Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
