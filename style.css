@@ -66,7 +66,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
-#delete-all {
+.delete-all {
   background-color: var(--color-error);
 }
 table {

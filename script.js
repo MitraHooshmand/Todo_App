@@ -4,8 +4,8 @@ const todoDate = document.getElementById("date-input");
 const addButton = document.querySelector(".add-button");
 const messagePlaceholdet = document.getElementById("message-placeholder");
 const tBody = document.querySelector("tbody");
+const deleteAll = document.querySelector(".delete-all");
 let dataArray = JSON.parse(localStorage.getItem("dataArray")) || [];
-// console.log(dataArray);
 ///////////////////
 const generateID = function () {
   return Math.round(
@@ -34,7 +34,7 @@ const showTask = function () {
  </tr>`;
   });
 };
-showTask();
+window.addEventListener("load", showTask);
 ///////////////////////
 const showMessage = function (message, type) {
   messagePlaceholdet.innerHTML = "";
@@ -74,3 +74,13 @@ addButton.addEventListener("click", function () {
   }
 });
 //////////////////////////
+deleteAll.addEventListener("click", function () {
+  if (dataArray.length) {
+    dataArray = [];
+    saveToLocalStorage();
+    showTask();
+    showMessage("All tasks deleted successfuly!", "success");
+  } else {
+    showMessage("There is no record to delete!", "error");
+  }
+});
