@@ -5,6 +5,9 @@ const addButton = document.querySelector(".add-button");
 const messagePlaceholdet = document.getElementById("message-placeholder");
 let dataArray = [];
 
+const generateID = function () {
+  return Math.round(Math.random() * Math.random()*Math.pow(10, 15)).toString();
+};
 const showMessage = function (message, type) {
   messagePlaceholdet.innerHTML = "";
   const pTag = document.createElement("p");
@@ -12,16 +15,17 @@ const showMessage = function (message, type) {
   pTag.classList.add("message");
   pTag.classList.add(`message-${type}`);
   messagePlaceholdet.append(pTag);
-  setTimeout(()=>{
-    pTag.style.display='none'
-  },3000)
+  setTimeout(() => {
+    pTag.style.display = "none";
+  }, 3000);
 };
 addButton.addEventListener("click", function () {
   const task = todoTask.value;
   const date = todoDate.value;
   const todoArray = {
-    task: task,
-    date: date,
+    id: generateID(),
+    task,
+    date,
     completed: false,
   };
   if (task) {
