@@ -29,7 +29,7 @@ const showTask = function () {
    <td>
      <button>Edit</button>
      <button>Do</button>
-     <button>Delete</button>
+     <button onclick='deleteHandler("${item.id}")'>Delete</button>
    </td>
  </tr>`;
   });
@@ -84,3 +84,11 @@ deleteAll.addEventListener("click", function () {
     showMessage("There is no record to delete!", "error");
   }
 });
+///////////////////////////////
+const deleteHandler = function (id) {
+  const filteredArray = dataArray.filter((item) => item.id !== id);
+  dataArray=filteredArray;
+  saveToLocalStorage()
+  showTask()
+  showMessage('The record is deleted successfuly!','success')
+};
