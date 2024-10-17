@@ -28,7 +28,9 @@ const showTask = function () {
    <td>${item.completed ? "Completed" : "Pending"}</td>
    <td>
      <button>Edit</button>
-     <button>Do</button>
+     <button onclick= 'toggleHandler("${item.id}")'>${
+      item.completed ? "Undo" : "Do"
+    }</button>
      <button onclick='deleteHandler("${item.id}")'>Delete</button>
    </td>
  </tr>`;
@@ -87,8 +89,17 @@ deleteAll.addEventListener("click", function () {
 ///////////////////////////////
 const deleteHandler = function (id) {
   const filteredArray = dataArray.filter((item) => item.id !== id);
-  dataArray=filteredArray;
-  saveToLocalStorage()
-  showTask()
-  showMessage('The record is deleted successfuly!','success')
+  dataArray = filteredArray;
+  saveToLocalStorage();
+  showTask();
+  showMessage("The record is deleted successfuly!", "success");
 };
+/////////////////////
+const toggleHandler = function (id) {
+  const SelectedItem = dataArray.find((item) => item.id === id);
+  SelectedItem.completed = !SelectedItem.completed;
+  saveToLocalStorage();
+  showTask();
+  showMessage("Task is edited successfuly", "success");
+};
+///////////////////////
