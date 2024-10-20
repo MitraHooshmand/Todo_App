@@ -2,6 +2,7 @@
 const todoTask = document.getElementById("task-input");
 const todoDate = document.getElementById("date-input");
 const addButton = document.querySelector(".add-button");
+const editButton = document.querySelector(".edit-button");
 const messagePlaceholdet = document.getElementById("message-placeholder");
 const tBody = document.querySelector("tbody");
 const deleteAll = document.querySelector(".delete-all");
@@ -27,7 +28,7 @@ const showTask = function () {
    <td>${item.date || "No Date Selected"}</td>
    <td>${item.completed ? "Completed" : "Pending"}</td>
    <td>
-     <button>Edit</button>
+     <button onclick='editHandler("${item.id}")'>Edit</button>
      <button onclick= 'toggleHandler("${item.id}")'>${
       item.completed ? "Undo" : "Do"
     }</button>
@@ -103,3 +104,25 @@ const toggleHandler = function (id) {
   showMessage("Task is edited successfuly", "success");
 };
 ///////////////////////
+const editHandler = function (id) {
+  const SelectedItem = dataArray.find((item) => item.id === id);
+  todoTask.value = SelectedItem.task;
+  todoDate.value = SelectedItem.date;
+  editButton.style.display = "inline-block";
+  addButton.style.display = "none";
+  editButton.dataset.id = id;
+  //   console.log(SelectedItem);
+};
+
+editButton.addEventListener("click", function () {
+  const id = event.target.dataset.id;
+  const selectedItem = dataArray.find((item) => item.id === id);
+  selectedItem.task = todoTask.value;
+  selectedItem.date = todoDate.value;
+  todoDate.value = todoTask.value = "";
+  editButton.style.display = "none";
+  addButton.style.display = "inline-block";
+  saveToLocalStorage();
+  showTask();
+  showMessage("The record edited successfully", "success");
+});
