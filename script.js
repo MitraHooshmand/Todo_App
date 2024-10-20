@@ -1,4 +1,5 @@
 "use strict";
+const operators = document.querySelector(".todo-operator");
 const todoTask = document.getElementById("task-input");
 const todoDate = document.getElementById("date-input");
 const addButton = document.querySelector(".add-button");
@@ -15,13 +16,14 @@ const generateID = function () {
 };
 ////////////////////////
 
-const showTask = function () {
-  if (!dataArray.length) {
+const showTask = function (data) {
+  const todoTasks = data ? data : dataArray;
+  if (!todoTasks.length) {
     tBody.innerHTML = '<tr><td colspan="4"> No Data Found! </td></tr>';
     return;
   }
   tBody.innerHTML = "";
-  dataArray.forEach((item) => {
+  todoTasks.forEach((item) => {
     tBody.innerHTML += `
      <tr>
    <td>${item.task}</td>
@@ -37,7 +39,7 @@ const showTask = function () {
  </tr>`;
   });
 };
-window.addEventListener("load", showTask);
+window.addEventListener("load", ()=>showTask());
 ///////////////////////
 const showMessage = function (message, type) {
   messagePlaceholdet.innerHTML = "";
@@ -125,4 +127,18 @@ editButton.addEventListener("click", function () {
   saveToLocalStorage();
   showTask();
   showMessage("The record edited successfully", "success");
+});
+/////////////////////////////////////
+operators.addEventListener("click", function (e) {
+  let filtredItem;
+  if (e.target.innerText != "All") {
+    if (e.target.innerText === "Pending") {
+      filtredItem = dataArray.filter((item) => item.completed === false);
+    } else {
+      filtredItem = dataArray.filter((item) => item.completed === true);
+    }
+    showTask(filtredItem);
+  }else{
+    showTask(dataArray)
+  }
 });
